@@ -44,3 +44,6 @@ function [F,G,H,ind]=OraclePH(qc,ind)
     
 endfunction
 
+
+
+
