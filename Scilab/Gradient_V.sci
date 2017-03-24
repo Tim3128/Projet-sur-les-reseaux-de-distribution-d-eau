@@ -61,7 +61,7 @@ function [fopt,xopt,gopt]=Gradient_V(Oracle,xini)
 //    - calcul de la longueur du pas de gradient
     
       //deltak = (F+4)/(k^(5/3));
-//      //alphak0 = (-2)*deltak/(G'*D);
+      //alphak0 = (-2)*deltak/(G'*D);
       [alpha,ok] = Wolfe(1,x,D,Oracle);
 
 //    - mise a jour des variables
