@@ -18,11 +18,10 @@ function [fopt,xopt,gopt]=Gradient_V(Oracle,xini)
 
    titre = "Parametres du gradient a pas variables";
    labels = ["Nombre maximal d''iterations";...
-             "Valeur du pas de gradient";...
              "Seuil de convergence sur ||G||"];
-   typ = list("vec",1,"vec",1,"vec",1);
-   default = ["5000";"0.0005";"0.000001"];
-   [ok,iter,alphai,tol] = getvalue(titre,labels,typ,default);
+   typ = list("vec",1,"vec",1);
+   default = ["5000";"0.000001"];
+   [ok,iter,tol] = getvalue(titre,labels,typ,default);
 
 // ----------------------------
 // Initialisation des variables
@@ -60,7 +59,9 @@ function [fopt,xopt,gopt]=Gradient_V(Oracle,xini)
       D = -G;
 
 //    - calcul de la longueur du pas de gradient
-
+    
+      //deltak = (F+4)/(k^(5/3));
+//      //alphak0 = (-2)*deltak/(G'*D);
       [alpha,ok] = Wolfe(1,x,D,Oracle);
 
 //    - mise a jour des variables
@@ -89,7 +90,7 @@ function [fopt,xopt,gopt]=Gradient_V(Oracle,xini)
            'Temps CPU         : ' string(tcpu);...
            'Critere optimal   : ' string(fopt);...
            'Norme du gradient : ' string(norm(gopt))];
-   disp('Fin de la methode de gradient a pas fixe')
+   disp('Fin de la methode de gradient a pas variables')
    disp(cvge)
 
 // - visualisation de la convergence

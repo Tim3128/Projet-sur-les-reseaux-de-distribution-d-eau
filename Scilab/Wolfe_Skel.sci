@@ -68,10 +68,10 @@ function [alphan,ok]=Wolfe(alpha,x,D,Oracle)
       
       [Fn, Gn] = Oracle(xn, ind)
       
-      if Fn > F0 + omega1*alphan*G0 then
+      if Fn > F0 + omega1*alphan*G0'*D then
           alphamax = alphan;
           alphan = (1/2)*(alphamin + alphamax);
-      elseif Gn < omega2 * G0 then
+      elseif Gn'*D < omega2 * G0'*D then
           alphamin = alphan;
           if alphamax == %inf then
               alphan = 2*alphamin;
