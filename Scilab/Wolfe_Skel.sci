@@ -79,7 +79,7 @@ function [alphan,ok]=Wolfe(alpha,x,D,Oracle)
               alphan = (1/2)*(alphamin + alphamax);
           end
       else
-          ok == 1;
+          ok = 1;
       end
 
       // Test d'indistinguabilite
