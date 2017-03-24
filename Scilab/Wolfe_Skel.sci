@@ -80,6 +80,7 @@ function [alphan,ok]=Wolfe(alpha,x,D,Oracle)
           end
       else
           ok == 1;
+      end
 
       // Test d'indistinguabilite
 

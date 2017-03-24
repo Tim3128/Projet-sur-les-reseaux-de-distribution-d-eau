@@ -40,7 +40,7 @@
    //
    exec('OraclePG.sci');
    exec('OraclePH.sci');
-   exec('Gradient_F.sci');
+   exec('Gradient_V.sci');
    exec('Optim_Scilab.sci');
    titrgr = "Fonction optim de Scilab sur le probleme primal";
 
