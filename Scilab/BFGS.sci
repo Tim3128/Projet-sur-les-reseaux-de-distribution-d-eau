@@ -78,9 +78,7 @@ function [fopt,xopt,gopt]=BFGS(Oracle,xini)
 
 
 //    - calcul de la longueur du pas de gradient
-    
-      //deltak = (F+4)/(k^(5/3));
-      //alphak0 = (-2)*deltak/(G'*D);
+
       [alpha,ok] = Wolfe(1,xk,Dk,Oracle);
 
 //    - mise a jour des variables
