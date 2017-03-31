@@ -7,7 +7,7 @@ function [fopt,xopt,gopt]=Newton(Oracle,xini)
 //                                                                           //
 //         RESOLUTION D'UN PROBLEME D'OPTIMISATION SANS CONTRAINTES          //
 //                                                                           //
-//         Methode de gradient a pas variables                                    //
+//         Methode de Newton a pas variables                                 //
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -16,7 +16,7 @@ function [fopt,xopt,gopt]=Newton(Oracle,xini)
 // Parametres de la methode
 // ------------------------
 
-   titre = "Parametres du gradient a pas variables";
+   titre = "Parametres de Newton a pas variables";
    labels = ["Nombre maximal d''iterations";...
              "Seuil de convergence sur ||G||"];
    typ = list("vec",1,"vec",1);
