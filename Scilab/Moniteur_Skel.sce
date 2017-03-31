@@ -67,10 +67,10 @@
 
    // Exemple : la fonction "optim" de Scilab
    //
-   //[fopt,xopt,gopt] = Gradient_V(OraclePH,xini);
+   [fopt,xopt,gopt] = Gradient_V(OraclePH,xini);
    //[fopt,xopt,gopt] = Polack_Ribiere(OraclePH,xini);
    //[fopt,xopt,gopt] = BFGS(OraclePH,xini);
-   [fopt,xopt,gopt] = Newton(OraclePH,xini);
+   //[fopt,xopt,gopt] = Newton(OraclePH,xini);
 
    // -----> A completer...
 
