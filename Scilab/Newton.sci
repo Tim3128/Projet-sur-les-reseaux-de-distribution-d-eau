@@ -1,13 +1,13 @@
 exec('Wolfe_Skel.sci')
 
-function [fopt,xopt,gopt]=Polack_Ribiere(Oracle,xini)
+function [fopt,xopt,gopt]=Newton(Oracle,xini)
 
 
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 //         RESOLUTION D'UN PROBLEME D'OPTIMISATION SANS CONTRAINTES          //
 //                                                                           //
-//         Methode de Polack_Ribiere à pas variables                         //
+//         Methode de gradient a pas variables                                    //
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -16,7 +16,7 @@ function [fopt,xopt,gopt]=Polack_Ribiere(Oracle,xini)
 // Parametres de la methode
 // ------------------------
 
-   titre = "Parametres de la méthode de Polack_Ribière a pas variables";
+   titre = "Parametres du gradient a pas variables";
    labels = ["Nombre maximal d''iterations";...
              "Seuil de convergence sur ||G||"];
    typ = list("vec",1,"vec",1);
@@ -38,49 +38,43 @@ function [fopt,xopt,gopt]=Polack_Ribiere(Oracle,xini)
 // -------------------------
 
    x = xini;
-   xk_1 = x;
-   xk = x;
+
    kstar = iter;
    for k = 1:iter
 
 //    - valeur du critere et du gradient
 
-      ind = 4;
-      [Fk,Gk] = Oracle(xk,ind);
+      ind = 7;
+      [F,G,H] = Oracle(x,ind);
 
 //    - test de convergence
 
-      if norm(Gk) <= tol then
+      if norm(G) <= tol then
          kstar = k;
          break
       end
 
 //    - calcul de la direction de descente
-      if k == 1 then
-          Dk = -Gk;
-      else
-          Betak = Gk'*(Gk-Gk_1)/(norm(Gk_1)^2)
-          Dk = -Gk + Betak * Dk_1;
-      end
 
+      D=-inv(H)*G;
 
 //    - calcul de la longueur du pas de gradient
+
     
       //deltak = (F+4)/(k^(5/3));
       //alphak0 = (-2)*deltak/(G'*D);
-      [alpha,ok] = Wolfe(1,xk,Dk,Oracle);
+
+      [alpha,ok] = Wolfe(1,x,D,Oracle);
 
 //    - mise a jour des variables
-      Gk_1 = Gk;
-      Dk_1 = Dk;
-      xk_1 = xk;
-      xk = xk + (alpha*Dk);
+
+      x = x + (alpha*D);
 
 //    - evolution du gradient, du pas et du critere
 
-      logG = [ logG ; log10(norm(Gk)) ];
+      logG = [ logG ; log10(norm(G)) ];
       logP = [ logP ; log10(alpha) ];
-      Cout = [ Cout ; Fk ];
+      Cout = [ Cout ; F ];
 
    end
 
@@ -88,9 +82,9 @@ function [fopt,xopt,gopt]=Polack_Ribiere(Oracle,xini)
 // Resultats de l'optimisation
 // ---------------------------
 
-   fopt = Fk;
-   xopt = xk;
-   gopt = Gk;
+   fopt = F;
+   xopt = x;
+   gopt = G;
 
    tcpu = timer();
 
