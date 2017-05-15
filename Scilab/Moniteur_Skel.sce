@@ -40,6 +40,8 @@
    //
    exec('OraclePG.sci');
    exec('OraclePH.sci');
+   exec('OracleDG.sci');
+   exec('OracleDH.sci');
    exec('Gradient_F.sci');
    exec('Gradient_V.sci');
    exec('Gradient_F.sci');
@@ -47,11 +49,7 @@
    exec('BFGS.sci');
    exec('Newton.sci');
    exec('Optim_Scilab.sci');
-   titrgr = "Fonction optim de Scilab sur le probleme primal";
-
-   // -----> A completer...
-   // -----> A completer...
-   // -----> A completer...
+   titrgr = "Fonction Newton à pas variable sur le probleme primal";
 
 // ------------------------------
 // Initialisation de l'algorithme
@@ -60,26 +58,39 @@
    // La dimension (n-md) est celle du probleme primal
 
    xini = 0.1 * rand(n-md,1);
+   lambdaini = 0.1 * rand(m-mr,1);
 
 // ----------------------------
 // Minimisation proprement dite
 // ----------------------------
 
    // Exemple : la fonction "optim" de Scilab
-   //
-   [fopt,xopt,gopt] = Gradient_V(OraclePH,xini);
+   //[fopt, xopt, gopt] = optim(OraclePG, xini);
+   //[fopt,xopt,gopt] = Gradient_F(OraclePH,xini);
+   //[fopt,xopt,gopt] = Gradient_V(OraclePH,xini);
    //[fopt,xopt,gopt] = Polack_Ribiere(OraclePH,xini);
    //[fopt,xopt,gopt] = BFGS(OraclePH,xini);
-   //[fopt,xopt,gopt] = Newton(OraclePH,xini);
+   [fopt,xopt,gopt] = Newton(OraclePH,xini);
 
-   // -----> A completer...
+   // Minimisation du duale
+   
+   //[fopt,lambdaopt,gopt] = Gradient_V(OracleDG,lambdaini);
+   //[fopt,lamdaopt,gopt] = Polack_Ribiere(OracleDH,lambdaini);
+   //[fopt,lambdaopt,gopt] = BFGS(OracleDH,lambdaini);
+   // [fopt,lambdaopt,gopt] = Newton(OracleDH,lambdaini);
 
 // --------------------------
 // Verification des resultats
 // --------------------------
 
    [q,z,f,p] = HydrauliqueP(xopt);
-
+   
    Verification(q,z,f,p);
+   
+   //[q,z,f,p] = HydrauliqueD(lambdaopt);
+   
+   //Verification(q,z,f,p);
+
+
 
 //

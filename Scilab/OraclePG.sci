@@ -11,7 +11,7 @@ function [F,G,ind]=OraclePG(qc,ind)
     end
     if ind == 4 then
         F=(1/3)*q'*(r.*q.*abs(q))+pr'*Ar*q;
-        G=B'*(r.*q.*abs(q)+Ar'*pr);
+        G = B'*(r.*q.*abs(q)+Ar'*pr);
     end
     
 endfunction

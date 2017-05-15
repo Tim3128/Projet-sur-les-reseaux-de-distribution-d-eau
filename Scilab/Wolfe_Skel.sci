@@ -1,6 +1,5 @@
 function [alphan,ok]=Wolfe(alpha,x,D,Oracle)
 
-
 //////////////////////////////////////////////////////////////
 //                                                          //
 //   RECHERCHE LINEAIRE SUIVANT LES CONDITIONS DE WOLFE     //

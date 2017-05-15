@@ -20,17 +20,17 @@ function [F,G,H,ind]=OraclePH(qc,ind)
     if ind == 5 then
         F = 0;
         G = 0;
-        H=2*B'*diag(r.*abs(q))*B;
+        H = 2*B'*diag(r.*abs(q))*B;
     end
     if ind == 6 then
         F = 0;
         G = B'*(r.*q.*abs(q)+Ar'*pr);
-        H=2*B'*diag(r.*abs(q))*B;
+        H = 2*B'*diag(r.*abs(q))*B;
     end
     if ind == 7 then
         F = (1/3)*q'*(r.*q.*abs(q))+pr'*Ar*q;
         G = B'*(r.*q.*abs(q)+Ar'*pr);
-        H=2*B'*diag(r.*abs(q))*B;
+        H = 2*B'*diag(r.*abs(q))*B;
     end
     
 endfunction
