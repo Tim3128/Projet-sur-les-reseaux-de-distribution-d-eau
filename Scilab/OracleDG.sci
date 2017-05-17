@@ -1,7 +1,7 @@
 function [F,G,ind]=OracleDG(lambda,ind)
 
     z = Ar'*pr + Ad'*lambda;
-    q = (abs(z)./r).^(1/2).*sign(-z);
+    q = sqrt(abs(z)./r).*sign(-z);
     
     if ind == 2 then
         F = -((1/3)*q'*(r.*q.*abs(q)) + pr'*Ar*q + lambda'*(Ad*q-fd));
